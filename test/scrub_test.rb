@@ -62,9 +62,14 @@ describe "ScrubRb" do
     ScrubRb.scrub(@bad_bytes_utf8, '').must_equal("Mxico")
   end
 
+
   it "replaces non-unicode encoding with ? replacement str" do
+    if RUBY_PLATFORM == "java"
+      skip("known not to pass on JRuby, reported to JRuby github #1361")
+    end
     ScrubRb.scrub(@bad_bytes_ascii).must_equal("M?xico")
   end
+
 
   it "works with first byte bad" do
     str = "\xE9xico".force_encoding("UTF-8")
