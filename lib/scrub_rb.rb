@@ -1,4 +1,5 @@
 require "scrub_rb/version"
+require 'scrub_rb/monkey_patch'
 
 module ScrubRb
 
