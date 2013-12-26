@@ -50,7 +50,7 @@ This pure ruby implementation is about an order of magnitude slower than stdlib 
 
 ## Discrepency with MRI 2.1 String#scrub
 
-If there are more than one concurrent invalid byte in a string, should the entire block be replaced with only one replacement, or should each invalid byte be replaced with a replacement?
+If there is a sequence of multiple contiguous invalid bytes in a string, should the entire block be replaced with only one replacement, or should each invalid byte be replaced with a replacement?
 
 I have not been able to understand the logic MRI 2.1 uses to divide contiguous invalid bytes into
 certain sub-sequences for replacement, as represented in the [test suite](https://github.com/ruby/ruby/blob/3ac0ec4ecdea849143ed64e8935e6675b341e44b/test/ruby/test_m17n.rb#L1505).  The test suite may be suggesting that the examples are from unicode documentation, but I wasn't able to find such documentation to see if it shed any light on the matter.
@@ -63,7 +63,7 @@ For most uses, this discrepency is probably not of consequence.
 
 If anyone can explain whats going on here, I'm very curious! I can't read C very well to try and figure it out from source.
 
-## Jruby may raise
+## JRuby may raise
 
 Due to an apparent JRuby bug, some invalid strings cause an internal
 exception from JRuby when trying to scrub_rb. The entire original MRI test suite
@@ -71,7 +71,7 @@ does passes against scrub_rb in JRuby -- but [one test original to us, involving
 input tagged 'ascii' encoding](./test/scrub_test.rb#L67),  fails raising an ArrayIndexOutOfBoundsException
 from inside of JRuby.  I have filed an [issue with JRuby](https://github.com/jruby/jruby/issues/1361).
 
-I believe this problem should be rare -- so far, the only reproduction case involves an input string tagged 'ascii' encoding, which probably isn't a common use case. But it's unfortunate
+**I believe this problem is likely to be rare** -- so far, the only reproduction case involves an input string tagged 'ascii' encoding, which probably isn't a common use case. But it's unfortunate
 that `scrub_rb` isn't reliable on jruby.  I haven't been able to figure out any workaround in ruby to the jruby bug -- you could theoretically provide a Java alternate implementation usable in jruby, but I'm not sure what Java tools are available and how hard it would be to match the scrub api.
 
 ## Contributions
