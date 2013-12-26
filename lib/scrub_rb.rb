@@ -18,7 +18,7 @@ module ScrubRb
          # it can't be (which should be non-unicode encodings)
          "\xEF\xBF\xBD".force_encoding("UTF-8").encode( str.encoding,
                                                   :undef => :replace,
-                                                  :replace => '?' )
+                                                  :replace => '?' )  
     end
 
     result          = ""
@@ -47,10 +47,22 @@ module ScrubRb
   private
   def self.scrub_replace(result, bad_chars, replacement, block)
     if block
-      result << block.call(bad_chars)
+      r = block.call(bad_chars)
     else
-      result << replacement
+      r = replacement
     end
+
+    if r.respond_to?(:to_str)
+      r = r.to_str
+    else
+      raise TypeError, "no implicit conversion of #{r.class} into String"
+    end
+
+    unless r.valid_encoding?
+      raise ArgumentError,  "replacement must be valid byte sequence '#{replacement}'"
+    end
+
+    result << r
     bad_chars.clear
   end
 
