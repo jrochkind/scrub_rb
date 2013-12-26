@@ -7,7 +7,7 @@ require 'scrub_rb'
 
 # Going to require the monkey-patch, which will end up
 # monkey-patching String for entire program execution, don't
-# know any way to monkey patch just for this test, sorry. 
+# know any way to monkey patch just for this test, sorry.
 
 require 'scrub_rb/monkey_patch'
 
