@@ -23,30 +23,35 @@ module ScrubRb
 
     result          = ""
     bad_chars       = ""
+    bad_char_flag   = false # weirdly, optimization to use flag
 
     str.chars.each do |c|
       if c.valid_encoding?
-        scrub_replace(result, bad_chars, replacement, block)
+        if bad_char_flag
+          scrub_replace(result, bad_chars, replacement, block)
+          bad_char_flag = false
+        end
         result << c
       else
+        bad_char_flag = true
         bad_chars << c
       end
     end
-    scrub_replace(result, bad_chars, replacement, block)
+    if bad_char_flag
+      scrub_replace(result, bad_chars, replacement, block)
+    end
 
     return result
   end
 
   private
   def self.scrub_replace(result, bad_chars, replacement, block)
-    if bad_chars.length > 0
-      if block
-        result << block.call(bad_chars)
-      else
-        result << replacement
-      end
-      bad_chars.clear
+    if block
+      result << block.call(bad_chars)
+    else
+      result << replacement
     end
+    bad_chars.clear
   end
 
 end
