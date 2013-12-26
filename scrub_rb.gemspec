@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = ScrubRb::VERSION
   spec.authors       = ["Jonathan Rochkind"]
   spec.email         = ["jonathan@dnil.net"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.summary       = %q{Pure-ruby polyfill of MRI 2.1 String#scrub, for ruby 1.9 and 2.0 any interpreter
+}
+  spec.homepage      = "https://github.com/jrochkind/scrub_rb"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
