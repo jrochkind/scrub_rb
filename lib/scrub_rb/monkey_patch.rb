@@ -7,7 +7,7 @@
 
 class String
   # Only monkey patch if not already defined....
-  unless methods.include? :scrub
+  unless instance_methods.include? :scrub
     def scrub(replacement=nil, &block)
       ScrubRb.scrub(self, replacement, &block)
     end
