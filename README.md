@@ -21,8 +21,8 @@ Or install it yourself as:
 
 ## What it is
 
-Ruby 2.1 introduces String#scrub, a method to replace invalid bytes in a given string
-and it's specified encoding.  See docs in [MRI ruby source](https://github.com/ruby/ruby/blob/1e8a05c1dfee94db9b6b825097e1d192ad32930a/string.c#L7772)
+Ruby 2.1 introduces String#scrub, a method to replace bytes in a string that are invalid for it's specified encoding.
+See docs in [MRI ruby source](https://github.com/ruby/ruby/blob/1e8a05c1dfee94db9b6b825097e1d192ad32930a/string.c#L7772)
 
 If you need String#scrub in MRI ruby 2.0, you can use the [string-scrub gem](https://github.com/hsbt/string-scrub), which provides a backport of the C code from MRI ruby 2.1 into MRI 2.0.
 
