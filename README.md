@@ -2,7 +2,7 @@
 
 Pure-ruby polyfill of MRI 2.1 String#scrub, for ruby 1.9 and 2.0 any interpreter
 
-[![Build Status](https://travis-ci.org/jrochkind/scrub_rb.png?branch=master)](https://travis-ci.org/jrochkind/scrub_rb)
+[![Build Status](https://travis-ci.org/jrochkind/scrub_rb.png?branch=master)](https://travis-ci.org/jrochkind/scrub_rb) [![Gem Version](https://badge.fury.io/rb/scrub_rb.png)](http://badge.fury.io/rb/scrub_rb)
 
 ## Installation
 
