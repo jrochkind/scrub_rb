@@ -66,7 +66,9 @@ If anyone can explain whats going on here, I'm very curious! I can't read C very
 ## JRuby may raise
 
 Due to an apparent JRuby bug, some invalid strings cause an internal
-exception from JRuby when trying to scrub_rb. The entire original MRI test suite
+exception from JRuby when trying to scrub_rb. This bug should [be fixed in jruby 1.7.11](https://github.com/jruby/jruby/issues/1361#issuecomment-35776377)
+
+In Jruby versions prior to that, The entire original MRI test suite
 does passes against scrub_rb in JRuby -- but [one test original to us, involving
 input tagged 'ascii' encoding](./test/scrub_test.rb#L67),  fails raising an ArrayIndexOutOfBoundsException
 from inside of JRuby.  I have filed an [issue with JRuby](https://github.com/jruby/jruby/issues/1361).
