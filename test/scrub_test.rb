@@ -58,6 +58,15 @@ describe "ScrubRb" do
     ScrubRb.scrub(@bad_bytes_utf8, "*").must_equal("M*xico")
   end
 
+  it "preserves encoding with replacement string" do
+    input = "good".force_encoding("UTF-8")
+    assert_equal input.encoding.name, ScrubRb.scrub(input, "*").encoding.name
+    assert_equal input.encoding.name, ScrubRb.scrub(input).encoding.name
+
+    assert_equal "UTF-8", ScrubRb.scrub(@bad_bytes_utf8, "*").encoding.name
+    assert_equal "UTF-8", ScrubRb.scrub(@bad_bytes_utf8).encoding.name
+  end
+
   it "replaces with empty string" do
     ScrubRb.scrub(@bad_bytes_utf8, '').must_equal("Mxico")
   end

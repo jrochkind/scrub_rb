@@ -22,8 +22,8 @@ module ScrubRb
                                                   :replace => '?' )  
     end
 
-    result          = ""
-    bad_chars       = ""
+    result          = "".force_encoding("BINARY")
+    bad_chars       = "".force_encoding("BINARY")
     bad_char_flag   = false # weirdly, optimization to use flag
 
     str.chars.each do |c|
@@ -41,6 +41,8 @@ module ScrubRb
     if bad_char_flag
       scrub_replace(result, bad_chars, replacement, block)
     end
+
+    result.force_encoding(str.encoding)
 
     return result
   end
