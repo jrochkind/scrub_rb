@@ -65,7 +65,7 @@ If anyone can explain whats going on here, I'm very curious! I can't read C very
 
 ## JRuby in earlier versions may raise
 
-Use Jruby after 1.7.11 to avoid [a known bug](https://github.com/jruby/jruby/issues/1361#issuecomment-35776377) that made JRuby raise exceptions on certain unusual illegal byte combinations and prevent scrub_rb from scrubbing them. 
+Use Jruby 1.7.11 or later to avoid [a known bug](https://github.com/jruby/jruby/issues/1361#issuecomment-35776377) that made JRuby raise exceptions on certain unusual illegal byte combinations and prevent scrub_rb from scrubbing them. 
 
 ## Contributions
 
