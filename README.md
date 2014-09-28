@@ -63,18 +63,9 @@ For most uses, this discrepency is probably not of consequence.
 
 If anyone can explain whats going on here, I'm very curious! I can't read C very well to try and figure it out from source.
 
-## JRuby may raise
+## JRuby in earlier versions may raise
 
-Due to an apparent JRuby bug, some invalid strings cause an internal
-exception from JRuby when trying to scrub_rb. This bug should [be fixed in jruby 1.7.11](https://github.com/jruby/jruby/issues/1361#issuecomment-35776377)
-
-In Jruby versions prior to that, The entire original MRI test suite
-does passes against scrub_rb in JRuby -- but [one test original to us, involving
-input tagged 'ascii' encoding](./test/scrub_test.rb#L67),  fails raising an ArrayIndexOutOfBoundsException
-from inside of JRuby.  I have filed an [issue with JRuby](https://github.com/jruby/jruby/issues/1361).
-
-**I believe this problem is likely to be rare** -- so far, the only reproduction case involves an input string tagged 'ascii' encoding, which probably isn't a common use case. But it's unfortunate
-that `scrub_rb` isn't reliable on jruby.  I haven't been able to figure out any workaround in ruby to the jruby bug -- you could theoretically provide a Java alternate implementation usable in jruby, but I'm not sure what Java tools are available and how hard it would be to match the scrub api.
+Use Jruby after 1.7.11 to avoid [a known bug](https://github.com/jruby/jruby/issues/1361#issuecomment-35776377) that made JRuby raise exceptions on certain unusual illegal byte combinations and prevent scrub_rb from scrubbing them. 
 
 ## Contributions
 
